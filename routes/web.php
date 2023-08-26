@@ -165,6 +165,8 @@ Route::controller(PropertyTypeController::class)->group(function(){
     Route::post('/active/property','ActiveProperty')->name('active.property');
     Route::get('/admin/package/history','AdminPackageHistory')->name('admin.package.history');
     Route::get('/package/invoice/{id}','PackageInvoice')->name('package.invoice');
+    Route::get('/admin/property/message/','AdminPropertyMessage')->name('admin.property.message');
+    Route::get('/admin/message/details/{id}','AdminMessageDetails')->name('admin.message.details');
 
 
   });
@@ -203,6 +205,8 @@ Route::controller(PropertyTypeController::class)->group(function(){
     Route::post('/agent/update/property/facilities/','AgentUpdatePropertyFacilities')->name('agent.update.property.facilities');
     Route::get('/agent/details/property/{id}','AgentDetailsProperty')->name('agent.details.property');
     Route::get('/agent/delete/property/{id}','AgentDeleteProperty')->name('agent.delete.property');
+    Route::get('/agent/property/message/','AgentPropertyMessage')->name('agent.property.message');
+    Route::get('/agent/message/details/{id}','AgentMessageDetails')->name('agent.message.details');
 
   });
 

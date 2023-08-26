@@ -10,11 +10,13 @@ use App\Models\Facility;
 use App\Models\PropertyType;
 use App\Models\Amenities;
 use App\Models\User;
+use App\Models\PropertyMessage;
 use Intervention\Image\Facades\Image;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\PackagePlan;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
@@ -387,5 +389,18 @@ class PropertyController extends Controller
         ]);
         return $pdf->download('invoice.pdf');
      }
+
+     public function AdminPropertyMessage(){
+        $usermsg=PropertyMessage::latest()->get();
+        return view('backend.message.all_massage',compact('usermsg'));
+     }
+     public function AdminMessageDetails($id){
+        $uid=Auth::user()->id;
+        $usermsg=PropertyMessage::where('agent_id',$uid)->get();
+
+        $msgdetails=PropertyMessage::findOrFail($id);
+
+        return view('backend.message.message_details',compact('msgdetails','usermsg'));
+    }
 
 }
