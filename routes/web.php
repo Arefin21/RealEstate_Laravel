@@ -241,3 +241,21 @@ Route::post('/add-to-compare/{property_id}',[CompareController::class,'AddToComp
 //Send Message from Property Details Page
 
 Route::post('/property/message/',[IndexController::class,'PropertyMessage'])->name('property.message');
+
+//Agent details page in frontend
+Route::get('/agent/details/{id}',[IndexController::class,'AgentDetails'])->name('agent.details');
+
+//Send Message from Agent Details Page
+Route::post('/agent/details/message',[IndexController::class,'AgentDetailsMessage'])->name('agent.details.message');
+
+//Get All Rent/Buy Property
+
+Route::get('/rent/property',[IndexController::class,'RentProperty'])->name('rent.property');
+
+Route::get('/buy/property',[IndexController::class,'BuyProperty'])->name('buy.property');
+
+//Get all property type data
+
+Route::get('/property/type/{id}',[IndexController::class,'PropertyType'])->name('property.type');
+
+
