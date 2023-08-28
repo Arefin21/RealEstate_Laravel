@@ -106,8 +106,12 @@
             <div class="col-sm-3">
                 <div class="mb-3">
                     <label class="form-label">State</label>
-                    <input type="text" name="state" class="form-control"
-                    value="{{$property->state}}">
+                    <select name="state" class="form-select" id="exampleFormControlSelect1">
+                    <option selected="" disabled="">Select State</option>
+@foreach($pState as $item)
+<option value="{{ $item->id }}" {{ $item->id == $property->state ? 'selected' : '' }}>{{ $item->state_name }}</option>
+@endforeach
+                </select>
                 </div>
             </div><!-- Col -->
             <div class="col-sm-3">

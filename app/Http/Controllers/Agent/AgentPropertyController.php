@@ -10,6 +10,7 @@ use App\Models\Facility;
 use App\Models\PropertyType;
 use App\Models\Amenities;
 use App\Models\User;
+use App\Models\State;
 use App\Models\PackagePlan;
 use App\Models\PropertyMessage;
 use Intervention\Image\Facades\Image;
@@ -33,7 +34,7 @@ class AgentPropertyController extends Controller
 
         $propertytype=PropertyType::latest()->get();
         $amenities=Amenities::latest()->get();
-
+$pState=State::latest()->get();
         $id=Auth::user()->id;
         $property=User::where('role','agent')->where('id',$id)->first();
 
@@ -42,7 +43,7 @@ class AgentPropertyController extends Controller
         if($pcount==1 || $pcount==7){
             return redirect()->route('buy.package');
         }else{
-            return view('agent.property.add_property',compact('propertytype','amenities'));
+            return view('agent.property.add_property',compact('propertytype','amenities','pState'));
         }
 
         
@@ -147,7 +148,7 @@ return redirect()->route('agent.all.property')->with($notification);
     public function AgentEditProperty($id){
         $facilities=Facility::where('property_id',$id)->get();
         $property=Property::findOrFail($id);
-
+    $pState=State::latest()->get();
         $type=$property->amenities_id;
         $property_ame=explode(',',$type);
 
@@ -158,7 +159,7 @@ return redirect()->route('agent.all.property')->with($notification);
         
 
         return view('agent.property.edit_property',
-        compact('property','propertytype','amenities','property_ame','multImage','facilities'));
+        compact('property','propertytype','amenities','property_ame','multImage','facilities','pState'));
     }
 
     public function AgentUpdateProperty(Request $request){

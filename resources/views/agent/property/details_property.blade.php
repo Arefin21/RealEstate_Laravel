@@ -55,8 +55,8 @@
                     <td><code>{{$property->city}}</code></td>
                 </tr>
                 <tr>
-                    <td>Status</td>
-                    <td><code>{{$property->status}}</code></td>
+                    <td>State</td>
+                    <td><code>{{$property['pstate']['state_name']}}</code></td>
                 </tr>
                 <tr>
                     <td>Postal Code</td>
@@ -130,7 +130,7 @@
                     <select name="amenities_id[]" class="js-example-basic-multiple form-select"
                     multiple="multiple" data-width="100%">
                     @foreach ($amenities as $amenitie)
-                    <option value="{{$amenitie->id}}"{{(in_array($amenitie->id,$property_ame))?
+                    <option value="{{$amenitie->amenitis_name}}"{{(in_array($amenitie->amenitis_name,$property_ame))?
                         'selected':''}}>{{$amenitie->amenitis_name}}
                     </option>
                     @endforeach
