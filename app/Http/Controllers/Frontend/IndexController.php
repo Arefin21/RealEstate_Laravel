@@ -131,4 +131,51 @@ class IndexController extends Controller
         $bstate=State::where('id',$id)->first();
         return view('frontend.property.state_property',compact('property','bstate'));
     }
+
+    public function BuyPropertySearch(Request $request){
+
+        $request->validate(['search'=>'required']);
+
+            $item=$request->search;
+            $sstate=$request->state;
+            $stype=$request->ptype_id;
+
+            $property=Property::where('property_name','like','%'.$item.'%')->
+                where('property_status','buy')->with('type','pstate')->
+                whereHas('pstate',function($q) use($sstate){
+                    $q->where('state_name','like','%'.$sstate.'%');
+                })
+                ->whereHas('type',function($q) use($stype){
+                    $q->where('type_name','like','%'.$stype.'%');
+                })->get();
+
+        $rentproperty=Property::where('property_status','rent')->get();
+        $buyproperty=Property::where('property_status','buy')->get();
+        $propertyPagination=Property::where('status','1')->where('property_status','buy')->paginate(2);
+
+        return view('frontend.property.property_search',compact('property','rentproperty','buyproperty','propertyPagination'));
+    }
+
+    public function RentPropertySearch(Request $request){
+        $request->validate(['search'=>'required']);
+
+        $item=$request->search;
+        $sstate=$request->state;
+        $stype=$request->ptype_id;
+
+        $property=Property::where('property_name','like','%'.$item.'%')->
+            where('property_status','rent')->with('type','pstate')->
+            whereHas('pstate',function($q) use($sstate){
+                $q->where('state_name','like','%'.$sstate.'%');
+            })
+            ->whereHas('type',function($q) use($stype){
+                $q->where('type_name','like','%'.$stype.'%');
+            })->get();
+
+            $rentproperty=Property::where('property_status','rent')->get();
+            $buyproperty=Property::where('property_status','buy')->get();
+            $propertyPagination=Property::where('status','1')->where('property_status','rent')->paginate(2);
+    
+            return view('frontend.property.property_search',compact('property','rentproperty','buyproperty','propertyPagination'));
+        }
 }
