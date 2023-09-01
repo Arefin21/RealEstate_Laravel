@@ -178,4 +178,29 @@ class IndexController extends Controller
     
             return view('frontend.property.property_search',compact('property','rentproperty','buyproperty','propertyPagination'));
         }
+
+        public function AllPropertySearch(Request $request){
+           
+            $property_status=$request->property_status;
+            $sstate=$request->state;
+            $stype=$request->ptype_id;
+            $bedrooms=$request->bedrooms;
+            $bathrooms=$request->bathrooms;
+
+$property=Property::where('status','1')->where('bedrooms',$bedrooms)
+            ->where('bathrooms','like','%'.$bathrooms.'%')
+                ->where('property_status',$property_status)->with('type','pstate')
+                    ->whereHas('pstate',function($q) use($sstate){
+                        $q->where('state_name','like','%'.$sstate.'%');
+                })
+                ->whereHas('type',function($q) use($stype){
+                    $q->where('type_name','like','%'.$stype.'%');
+                })->get();
+    
+                $rentproperty=Property::where('property_status','rent')->get();
+                $buyproperty=Property::where('property_status','buy')->get();
+                $propertyPagination=Property::where('status','1')->where('property_status','rent')->paginate(2);
+        
+                return view('frontend.property.property_search',compact('property','rentproperty','buyproperty','propertyPagination'));
+        }
 }

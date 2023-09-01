@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\StateController;
+use App\Http\Controllers\Backend\TestimonialController;
+use App\Http\Controllers\Backend\BlogController;
 
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -208,6 +210,33 @@ Route::controller(PropertyTypeController::class)->group(function(){
 
   });
 
+  //TestimonialController All Route
+
+  Route::controller(TestimonialController::class)->group(function(){
+
+    Route::get('/all/testimonials','AllTestimonials')->name('all.testimonials');
+    Route::get('/add/testimonials','AddTestimonials')->name('add.testimonials');
+    Route::post('/store/testimonials','StoreTestimonials')->name('store.testimonials');
+    Route::get('/edit/testimonials/{id}','EditTestimonials')->name('edit.testimonials');
+    Route::post('/update/testimonials','UpdateTestimonials')->name('update.testimonials');
+    Route::get('/delete/testimonials/{id}','DeleteTestimonials')->name('delete.testimonials');
+
+
+  });
+
+  //Blog Category all route
+
+  Route::controller(BlogController::class)->group(function(){
+
+    Route::get('/all/blog/category','AllBlogCategory')->name('all.blog.category');
+    Route::post('/store/blog/category','StoreBlogCategory')->name('store.blog.category');
+    Route::get('/blog/category/{id}','EditBlogCategory');
+    Route::post('/update/blog/category','UpdateBlogCategory')->name('update.blog.category');
+    Route::get('/delete/blog/category{id}','DeleteBlogCategory')->name('delete.blog.category');
+
+
+  });
+
  });
 
  ///Agent Group Middleware
@@ -290,3 +319,5 @@ Route::get('/state/details/{id}',[IndexController::class,'StateDetails'])->name(
 Route::post('/buy/property/search',[IndexController::class,'BuyPropertySearch'])->name('buy.property.search');
 
 Route::post('/rent/property/search',[IndexController::class,'RentPropertySearch'])->name('rent.property.search');
+
+Route::post('/all/property/search',[IndexController::class,'AllPropertySearch'])->name('all.property.search');
