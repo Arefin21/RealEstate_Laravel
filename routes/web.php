@@ -237,6 +237,20 @@ Route::controller(PropertyTypeController::class)->group(function(){
 
   });
 
+  //Blog Post All Route
+
+  Route::controller(BlogController::class)->group(function(){
+
+    Route::get('/all/post','AllPost')->name('all.post');
+    Route::get('/add/post','AddPost')->name('add.post');
+    Route::post('/store/post','StorePost')->name('store.post');
+    Route::get('/edit/post/{id}','EditPost')->name('edit.post');
+    Route::post('/update/post','UpdatePost')->name('update.post');
+    Route::get('/delete/post{id}','DeletePost')->name('delete.post');
+
+
+  });
+
  });
 
  ///Agent Group Middleware
@@ -321,3 +335,8 @@ Route::post('/buy/property/search',[IndexController::class,'BuyPropertySearch'])
 Route::post('/rent/property/search',[IndexController::class,'RentPropertySearch'])->name('rent.property.search');
 
 Route::post('/all/property/search',[IndexController::class,'AllPropertySearch'])->name('all.property.search');
+
+
+//Blog Details
+
+Route::get('/blog/details/{slug}',[BlogController::class,'BlogDetails']);

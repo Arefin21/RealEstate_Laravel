@@ -5,7 +5,7 @@
 
     <nav class="page-breadcrumb">
         <ol class="breadcrumb">
-            <a href="{{route('add.type')}}" class="btn btn-inverse-info">Add Property Type</a>  
+            <a href="{{route('add.post')}}" class="btn btn-inverse-info">Add Post</a>  
         </ol>
     </nav>
 
@@ -13,29 +13,32 @@
         <div class="col-md-12 grid-margin stretch-card">
 <div class="card">
   <div class="card-body">
-    <h6 class="card-title">All Property Type</h6>
+    <h6 class="card-title">Post All</h6>
    
     <div class="table-responsive">
       <table id="dataTableExample" class="table">
         <thead>
           <tr>
             <th>Sl</th>
-            <th>Type Name</th>
-            <th>Type Icon</th>
+            <th>Post Title</th>
+            <th>Category</th>
+            <th>Post Image</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
 
-        @foreach ($types as $key=>$item )
+        @foreach ($post as $key=>$item )
             
           <tr>
             <td>{{$key+1}}</td>
-            <td>{{$item->type_name}}</td>
-            <td>{{$item->type_icon}}</td>
+            <td>{{$item->post_title}}</td>
+            <td>{{$item['cat']['catagory_name']}}</td>
+            <td><img src="{{asset($item->post_image	)}}" alt="" 
+                style="width:70px; height:40px;" ></td>
             <td>
-              <a href="{{route('edit.type',$item->id)}}" class="btn btn-inverse-warning">Edit</a>  
-              <a href="{{route('delete.type',$item->id)}}" class="btn btn-inverse-danger" id="delete">Delete</a>  
+              <a href="{{route('edit.post',$item->id)}}" class="btn btn-inverse-warning">Edit</a>  
+              <a href="{{route('delete.post',$item->id)}}" class="btn btn-inverse-danger" id="delete">Delete</a>  
             </td>
           </tr>
 
