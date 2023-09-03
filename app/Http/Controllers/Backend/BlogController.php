@@ -178,6 +178,26 @@ class BlogController extends Controller
         $all_tags=explode(',',$tags);
         $bcategory=BlogCategory::latest()->get();
         $dpost=BlogPost::latest()->limit(3)->get();
+
         return view('frontend.blog.blog_details',compact('blog','all_tags','bcategory','dpost'));
+    }
+
+    public function BlogCatList($id){
+
+        $blog=BlogPost::where('blogcat_id',$id)->get();
+        $cname=BlogCategory::where('id',$id)->first();
+        $bcategory=BlogCategory::latest()->get();
+        $dpost=BlogPost::latest()->limit(3)->get();
+        
+        return view('frontend.blog.blog_cat_list',compact('blog','cname','bcategory','dpost'));
+    }
+
+    public function BlogList(){
+
+        $blog=BlogPost::latest()->get();
+        $bcategory=BlogCategory::latest()->get();
+        $dpost=BlogPost::latest()->limit(3)->get();
+        
+        return view('frontend.blog.blog_list',compact('blog','bcategory','dpost'));
     }
 }

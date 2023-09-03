@@ -179,7 +179,7 @@
                             $Cpost=App\Models\BlogPost::where('blogcat_id',$bct->id)->get();
                         @endphp
 
-                                <li><a href="">{{$bct->catagory_name}}<span>{{count($Cpost)}}</span></a></li>
+                                <li><a href="{{url('blog/cat/list/'.$bct->id)}}">{{$bct->catagory_name}}<span>{{count($Cpost)}}</span></a></li>
 
                                 @endforeach
                             </ul>
