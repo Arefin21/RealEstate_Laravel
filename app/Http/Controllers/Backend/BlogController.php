@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
+use App\Models\Comment;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -200,4 +201,58 @@ class BlogController extends Controller
         
         return view('frontend.blog.blog_list',compact('blog','bcategory','dpost'));
     }
+
+    public function StoreComment(Request $request){
+        $pid=$request->post_id;
+        Comment::insert([
+            'user_id'=>Auth::user()->id,
+            'post_id'=>$pid,
+            'parent_id'=>null,
+            'subject'=>$request->subject,
+            'message'=>$request->message,
+            'created_at'=>now(),
+        ]);
+        $notification=array(
+            'message'=>'Comment Inserted Successfully',
+            'alert-type'=>'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    public function AdminBlogComment(){
+
+        $comment=Comment::where('parent_id',null)->latest()->get();
+        return view('backend.comment.comment_all',compact('comment'));
+
+    }
+
+    public function AdminCommentReply($id){
+
+        $comment=Comment::where('id',$id)->first();
+        return view('backend.comment.reply_comment',compact('comment'));
+
+    }
+
+    public function ReplyMessage(Request $request){
+
+        $id=$request->id;
+        $user_id=$request->user_id;
+        $post_id=$request->post_id;
+
+        Comment::insert([
+            'user_id'=>$user_id,
+            'post_id'=>$post_id,
+            'parent_id'=>$id,
+            'subject'=>$request->subject,
+            'message'=>$request->message,
+            'created_at'=>now(),
+        ]);
+        $notification=array(
+            'message'=>'Comment Reply Successfully',
+            'alert-type'=>'success'
+        );
+        return redirect()->back()->with($notification);
+
+    }
+
 }
