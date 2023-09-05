@@ -21,6 +21,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        // if (\Schema::hasTable('smtp_setting')) {
+        //     $smtpSetting = SmtpSetting::first();
+
+        //     if ($smtpSetting) {
+        //         Config::set('mail.driver', $smtpSetting->mailer);
+        //         Config::set('mail.host', $smtpSetting->host);
+        //         Config::set('mail.port', $smtpSetting->port);
+        //         Config::set('mail.username', $smtpSetting->username);
+        //         Config::set('mail.password', $smtpSetting->password);
+        //         Config::set('mail.encryption', $smtpSetting->encryption);
+        //         Config::set('mail.from.address', $smtpSetting->from_address);
+        //         Config::set('mail.from.name', 'Realestate');
+        //     }
+        // }
+
+
         if(\Schema::hasTable('smtp_setting')){
             $smtpsetting=SmtpSetting::first();
 

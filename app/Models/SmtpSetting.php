@@ -8,5 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class SmtpSetting extends Model
 {
     use HasFactory;
+    
+    protected $table = 'smtp_setting';
+
     protected $guarded=[];
 }
