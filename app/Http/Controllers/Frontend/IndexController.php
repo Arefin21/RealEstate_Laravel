@@ -9,6 +9,7 @@ use App\Models\MultiImage;
 use App\Models\Facility;
 use App\Models\PropertyType;
 use App\Models\Amenities;
+use App\Models\Schedule;
 use App\Models\User;
 use App\Models\State;
 use App\Models\PackagePlan;
@@ -202,5 +203,37 @@ $property=Property::where('status','1')->where('bedrooms',$bedrooms)
                 $propertyPagination=Property::where('status','1')->where('property_status','rent')->paginate(2);
         
                 return view('frontend.property.property_search',compact('property','rentproperty','buyproperty','propertyPagination'));
+        }
+
+        public function StoreSchedule(Request $request){
+
+            $aid=$request->agent_id;
+            $pid=$request->property_id;
+
+            if(Auth::check()){
+
+                Schedule::insert([
+                    'user_id'=>Auth::user()->id,
+                    'property_id'=>$pid,
+                    'agent_id'=>$aid,
+                    'tour_date'=>$request->tour_date,
+                    'tour_time'=>$request->tour_time,
+                    'message'=>$request->message,
+                    'created_at'=>now(),
+                ]);
+
+                $notification=array(
+                    'message'=>'Send Request Successfully',
+                    'alert-type'=>'success'
+                );
+                return redirect()->back()->with($notification);
+
+            }else{
+                $notification=array(
+                    'message'=>'Please Login Your Account First',
+                    'alert-type'=>'error'
+                );
+                return redirect()->back()->with($notification);
+            }
         }
 }

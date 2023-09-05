@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\SettingController;
 
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -251,6 +252,19 @@ Route::controller(PropertyTypeController::class)->group(function(){
 
   });
 
+  //SMTP Setting Route
+
+  Route::controller(SettingController::class)->group(function(){
+
+    Route::get('/smtp/setting','SmtpSetting')->name('smtp.setting');
+    Route::post('/update/smtp/setting','UpdateSmtpSetting')->name('update.smtp.setting');
+   
+
+
+  });
+
+
+
  });
 
  ///Agent Group Middleware
@@ -272,7 +286,14 @@ Route::controller(PropertyTypeController::class)->group(function(){
     Route::get('/agent/delete/property/{id}','AgentDeleteProperty')->name('agent.delete.property');
     Route::get('/agent/property/message/','AgentPropertyMessage')->name('agent.property.message');
     Route::get('/agent/message/details/{id}','AgentMessageDetails')->name('agent.message.details');
+//Schedule Request Route
+    Route::get('/agent/schedule/request','AgentScheduleRequest')->name('agent.schedule.request');
 
+    Route::get('/agent/details/schedule/{id}','AgentDetailsSchedule')->name('agent.details.schedule');
+
+    Route::post('/agent/update/schedule/','AgentUpdateSchedule')->name('agent.update.schedule');
+
+    
   });
 
   //Agent Buy Package route
@@ -346,3 +367,7 @@ Route::post('/store/comment',[BlogController::class,'StoreComment'])->name('stor
 Route::get('/admin/blog/comment',[BlogController::class,'AdminBlogComment'])->name('admin.blog.comment');
 Route::get('/admin/comment/reply/{id}',[BlogController::class,'AdminCommentReply'])->name('admin.comment.reply');
 Route::post('/reply.message',[BlogController::class,'ReplyMessage'])->name('reply.message');
+
+//Schedule tour
+
+Route::post('/store/schedule',[IndexController::class,'StoreSchedule'])->name('store.schedule');
