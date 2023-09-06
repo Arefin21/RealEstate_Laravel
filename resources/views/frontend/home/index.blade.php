@@ -1,5 +1,9 @@
         @extends('frontend.frontend_dashboard')
         @section('main')
+
+        @section('title')
+        Real Estate
+        @endsection
         
         <!-- banner-section -->
         @include('frontend.home.banner')

@@ -260,6 +260,8 @@ Route::controller(PropertyTypeController::class)->group(function(){
 
     Route::get('/smtp/setting','SmtpSetting')->name('smtp.setting');
     Route::post('/update/smtp/setting','UpdateSmtpSetting')->name('update.smtp.setting');
+    Route::get('/site/setting','SiteSetting')->name('site.setting');
+    Route::post('/update/site/setting','UpdateSiteSetting')->name('update.site.setting');
    
 
 

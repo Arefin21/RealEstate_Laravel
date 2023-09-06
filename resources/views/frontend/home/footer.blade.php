@@ -1,3 +1,9 @@
+@php
+    $setting=App\Models\SiteSetting::find(1);
+    $blog=App\Models\BlogPost::latest()->limit(2)->get();
+@endphp
+
+
 <footer class="main-footer">
     <div class="footer-top bg-color-2">
         <div class="auto-container">
@@ -36,16 +42,18 @@
                             <h3>Top News</h3>
                         </div>
                         <div class="post-inner">
+
+                            @foreach ($blog as $item)
+                            
                             <div class="post">
-                                <figure class="post-thumb"><a href="blog-details.html"><img src="{{asset('frontend/assets/images/resource/footer-post-1.jpg')}}" alt=""></a></figure>
-                                <h5><a href="blog-details.html">The Added Value Social Worker</a></h5>
-                                <p>Sep 25, 2023</p>
+                                <figure class="post-thumb"><a href="{{url('blog/details/'.$item->post_slug)}}"><img 
+                                src="{{asset($item->post_image)}}" alt=""></a></figure>
+                                <h5><a href="blog-details.html">{{$item->post_title}}</a></h5>
+                                <p>{{$item->created_at->format('M d Y')}}</p>
                             </div>
-                            <div class="post">
-                                <figure class="post-thumb"><a href="blog-details.html"><img src="{{asset('frontend/assets/images/resource/footer-post-2.jpg')}}" alt=""></a></figure>
-                                <h5><a href="blog-details.html">Ways to Increase Trust</a></h5>
-                                <p>Sep 25, 2023</p>
-                            </div>
+
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
@@ -56,9 +64,9 @@
                         </div>
                         <div class="widget-content">
                             <ul class="info-list clearfix">
-                                <li><i class="fas fa-map-marker-alt"></i>Dhaka,Dhanmodi</li>
-                                <li><i class="fas fa-microphone"></i><a href="tel:23055873407">+2(305) 587-3407</a></li>
-                                <li><i class="fas fa-envelope"></i><a href="mailto:info@example.com">arefinshagor18@gmail.com</a></li>
+                                <li><i class="fas fa-map-marker-alt"></i>{{$setting->company_address}}</li>
+                                <li><i class="fas fa-microphone"></i><a href="tel:23055873407">{{$setting->support_phone}}</a></li>
+                                <li><i class="fas fa-envelope"></i><a href="mailto:info@example.com">{{$setting->email}}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -71,7 +79,7 @@
             <div class="inner-box clearfix">
                 <figure class="footer-logo"><a href="index.html"><img src="{{asset('frontend/assets/images/footer-logo.png')}}" alt=""></a></figure>
                 <div class="copyright pull-left">
-                    <p><a href="index.html">Laravel 10</a> &copy; 2023 All Right Reserved</p>
+                    <p><a href="index.html">{{$setting->copyright}}</p>
                 </div>
                 <ul class="footer-nav pull-right clearfix">
                     <li><a href="index.html">Terms of Service</a></li>

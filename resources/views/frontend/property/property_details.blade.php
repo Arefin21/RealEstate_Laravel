@@ -1,6 +1,10 @@
 @extends('frontend.frontend_dashboard')
 @section('main')
 
+@section('title')
+{{$property->property_name}} | Real Estate
+@endsection
+
 <!--Page Title-->
 <section class="page-title-two bg-color-1 centred">
     <div class="pattern-layer">
