@@ -280,6 +280,13 @@ Route::controller(PropertyTypeController::class)->group(function(){
     Route::get('/delete/permission{id}','Deletepermission')->name('delete.permission');
 
 
+    Route::get('/import/permission','importPermission')->name('import.permission');
+    Route::get('/export','Export')->name('export');
+    Route::post('/import','Import')->name('import');
+
+    
+
+
 
  });
 
