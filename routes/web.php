@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\RoleController;
 
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -267,9 +268,22 @@ Route::controller(PropertyTypeController::class)->group(function(){
 
   });
 
+  // Permission All Route
+
+  Route::controller(RoleController::class)->group(function(){
+
+    Route::get('/all/permission','AllPermission')->name('all.permission');
+    Route::get('/add/permission','AddPermission')->name('add.permission');
+    Route::post('/store/permission','Storepermission')->name('store.permission');
+    Route::get('/edit/permission{id}','Editpermission')->name('edit.permission');
+    Route::post('/update/permission','Updatepermission')->name('update.permission');
+    Route::get('/delete/permission{id}','Deletepermission')->name('delete.permission');
+
 
 
  });
+
+});
 
  ///Agent Group Middleware
  Route::middleware(['auth','role:agent'])->group(function(){
