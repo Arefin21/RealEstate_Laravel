@@ -284,11 +284,41 @@ Route::controller(PropertyTypeController::class)->group(function(){
     Route::get('/export','Export')->name('export');
     Route::post('/import','Import')->name('import');
 
-    
-
 
 
  });
+
+//Roles All Route
+
+ Route::controller(RoleController::class)->group(function(){
+
+  Route::get('/all/roles','AllRoles')->name('all.roles');
+  Route::get('/add/roles','AddRoles')->name('add.roles');
+  Route::post('/store/roles','StoreRoles')->name('store.roles');
+  Route::get('/edit/roles{id}','EditRoles')->name('edit.roles');
+  Route::post('/update/roles','UpdateRoles')->name('update.roles');
+  Route::get('/delete/roles{id}','DeleteRoles')->name('delete.roles');
+
+
+
+  Route::get('/add/roles/permission','AddRolesPermission')->name('add.roles.permission');
+
+  Route::post('/role/permission/store','RolePermissionStore')->name('role.permission.store');
+  
+  Route::get('/all/roles/permission','AllRolePermission')->name('all.roles.permission');
+
+  Route::get('/admin/edit/roles{id}','AdminEditRoles')->name('admin.edit.roles');
+
+  Route::post('/admin/roles/update/{id}','AdminRolesUpdate')->name('admin.roles.update');
+
+  Route::get('/admin/delete/roles/{id}','AdminDeleteRoles')->name('admin.delete.roles');
+
+
+
+
+});
+
+
 
 });
 
