@@ -15,8 +15,9 @@
                 <div class="card-body">
   
                 <h6 class="card-title">Update Property Type</h6>
-
+                
             <form method="POST" action="{{route('update.type')}}" class="forms-sample">
+                
                 @csrf
 
                 <input type="hidden" name="id" value="{{$types->id}}">

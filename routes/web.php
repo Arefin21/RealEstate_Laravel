@@ -74,7 +74,7 @@ require __DIR__.'/auth.php';
 
 //Admin Group Middleware
 
-Route::middleware('auth','role:admin')->group(function () {
+Route::middleware('auth','roles:admin')->group(function () {
 Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
 
 Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
@@ -93,7 +93,7 @@ Route::post('/admin/update/password', [AdminController::class, 'AdminUpdatePassw
 
 
 
-Route::middleware('auth','role:agent')->group(function(){
+Route::middleware('auth','roles:agent')->group(function(){
     Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])
     ->name('agent.dashboard');
 
@@ -125,15 +125,15 @@ Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.
 ->middleware(RedirectIfAuthenticated :: Class);
 
 
-Route::middleware('auth','role:admin')->group(function () {
+Route::middleware('auth','roles:admin')->group(function () {
  
 //  Paroperty Type All Route  
 Route::controller(PropertyTypeController::class)->group(function(){
 
-    Route::get('/all/type','AllType')->name('all.type');
-    Route::get('/add/type','AddType')->name('add.type');
+    Route::get('/all/type','AllType')->name('all.type')->middleware('permission:all.type');
+    Route::get('/add/type','AddType')->name('add.type')->middleware('permission:add.type');
     Route::post('/store/type','StoreType')->name('store.type');
-    Route::get('/edit/type{id}','EditType')->name('edit.type');
+    Route::get('/edit/type{id}','EditType')->name('edit.type')->middleware('permission:edit.type');
     Route::post('/update/type','UpdateType')->name('update.type');
     Route::get('/delete/type{id}','DeleteType')->name('delete.type');
 
@@ -318,12 +318,27 @@ Route::controller(PropertyTypeController::class)->group(function(){
 
 });
 
+//Admin User All Route
+
+Route::controller(AdminController::class)->group(function(){
+
+  Route::get('/all/admin','AllAdmin')->name('all.admin');
+  Route::get('/add/admin','AddAdmin')->name('add.admin');
+  Route::post('/store/admin','StoreAdmin')->name('store.admin');
+  Route::get('/edit/admin/{id}','EditAdmin')->name('edit.admin');
+  Route::post('/update/admin/{id}','UpdateAdmin')->name('update.admin');
+  Route::get('/delete/admin/{id}','DeleteAdmin')->name('delete.admin');
+ 
+
+
+});
+
 
 
 });
 
  ///Agent Group Middleware
- Route::middleware(['auth','role:agent'])->group(function(){
+ Route::middleware(['auth','roles:agent'])->group(function(){
 
   Route::controller(AgentPropertyController::class)->group(function(){
 
