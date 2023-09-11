@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\Backend\ChatController;
 
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -44,6 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/password/update',[UserController::class,'UserPasswordUpdate'])->name('user.password.update');
 
     Route::get('/user/schedule/request',[UserController::class,'UseruserScheduleRequest'])->name('user.schedule.request');
+
+    Route::get('/live/chat',[UserController::class,'LiveChat'])->name('live.chat');
 
     //User Wishlist all route
 
@@ -187,7 +190,7 @@ Route::controller(PropertyTypeController::class)->group(function(){
     Route::get('/add/agent','AddAgent')->name('add.agent');
     Route::post('/store/agent','StoreAgent')->name('store.agent');
     Route::get('/edit/agent/{id}','EditAgent')->name('edit.agent');
-    Route::get('/update/agent','UpdateAgent')->name('update.agent');
+    Route::post('/update/agent','UpdateAgent')->name('update.agent');
     Route::get('/delete/agent/{id}','DeleteAgent')->name('delete.agent');
 
     Route::get('/changeStatus','changeStatus');
@@ -441,3 +444,14 @@ Route::post('/reply.message',[BlogController::class,'ReplyMessage'])->name('repl
 //Schedule tour
 
 Route::post('/store/schedule',[IndexController::class,'StoreSchedule'])->name('store.schedule');
+
+
+//Chat Post Request Route
+
+Route::post('/send-message',[ChatController::class,'SendMsg'])->name('send.msg');
+
+Route::get('/user-all',[ChatController::class,'GetAllUsers']);
+
+Route::get('/user-message/{id}',[ChatController::class,'UserMsgById']);
+
+Route::get('/agent/live/chat',[ChatController::class,'AgentLiveChat'])->name('agent.live.chat');
