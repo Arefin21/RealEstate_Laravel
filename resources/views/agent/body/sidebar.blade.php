@@ -87,6 +87,13 @@
             <span class="link-title">Schedule Request</span>
           </a>
         </li>
+        <li class="nav-item nav-category">Component</li>
+        <li class="nav-item">
+          <a href="{{route('agent.live.chat')}}" class="nav-link">
+            <i class="link-icon" data-feather="calendar"></i>
+            <span class="link-title">Live Chat</span>
+          </a>
+        </li>
 
         <li class="nav-item nav-category">User All Function</li>
         <li class="nav-item">
@@ -108,23 +115,7 @@
 
           </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="collapse" href="#advancedUI" role="button" aria-expanded="false" aria-controls="advancedUI">
-            <i class="link-icon" data-feather="anchor"></i>
-            <span class="link-title">Advanced UI</span>
-            <i class="link-arrow" data-feather="chevron-down"></i>
-          </a>
-          <div class="collapse" id="advancedUI">
-            <ul class="nav sub-menu">
-              <li class="nav-item">
-                <a href="pages/advanced-ui/cropper.html" class="nav-link">Cropper</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/advanced-ui/sweet-alert.html" class="nav-link">Sweet Alert</a>
-              </li>
-            </ul>
-          </div>
-        </li>
+       
 
         @else
         

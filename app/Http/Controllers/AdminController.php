@@ -165,7 +165,7 @@ class AdminController extends Controller
         return view('backend.agentuser.edit_agent',compact('allagent'));
     }
 
-    public function UpdataeAgent(Request $request){
+    public function UpdateAgent(Request $request){
 
         $user_id=$request->id;
 
